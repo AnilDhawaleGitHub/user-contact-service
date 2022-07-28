@@ -1,4 +1,4 @@
-# user-contact-info-service
+# user-contact-service
 This micro service allows clients to perform following operations
 - Save user contact (User Contact + Address) into H2 DB
 - Fetch user contact info by ID
@@ -11,7 +11,9 @@ This micro service allows clients to perform following operations
 This is stand alone service and can run independently , H2 Database is being used(in memory DB)
 
 # How to clone the application from Github
-`git clone https://github.com/AnilDhawaleGitHub/user-contact-service.git`
+`git clone https://github.com/AnilDhawaleGitHub/user-contact-service.git` - for HTTPS
+`git clone git@github.com:AnilDhawaleGitHub/user-contact-service.git` - for SSH
+
 
 # How to build and run the service
 ## Building the service
