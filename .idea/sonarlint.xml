@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SonarLintProjectSettings">
+    <option name="fileExclusions">
+      <list>
+        <option value="FILE:src/main/java/com/user/contact/info/controller/UserContactInfoController.java" />
+        <option value="FILE:microserviceTest.iml" />
+        <option value="DIRECTORY:src/main/java/com/user/contact/info/controller" />
+      </list>
+    </option>
+  </component>
+</project>
