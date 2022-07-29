@@ -24,10 +24,10 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
 
   private static final Logger logger = LoggerFactory.getLogger(UserContactInfoServiceImpl.class);
 
-  private static final String USER_CONTACT_INFO_NOT_FOUND_IN_DB = "user contact info not found in the database for Id : ";
-  private static final String REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB = "user contact info for the requested id's not present in database : ";
-  private static final String NO_USER_CONTACT_INFO_FOUND_IN_DB = "no user contact info found in the database ";
-  private static final String USER_CONTACT_INFO_DELETED = "user contact info has been deleted for Id : ";
+  private static final String USER_CONTACT_NOT_FOUND_IN_DB = "user contact not found in the database for Id : ";
+  private static final String REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB = "user contact for the requested id's not present in database : ";
+  private static final String NO_USER_CONTACT_FOUND_IN_DB = "no user contact found in the database ";
+  private static final String USER_CONTACT_DELETED = "user contact info has been deleted for Id : ";
   private static final String VALID_ID_ENTER = "please enter valid id's with comma separated eg: 1,2,3 ";
 
   @Autowired
@@ -40,7 +40,7 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
   public UserContact saveUserContactInfo(UserContactDto userContactDto) {
     modelMapper = new ModelMapper();
     userContact = modelMapper.map(userContactDto, UserContact.class);
-    logger.info("user contact info dto mapped to entity for persisting");
+    logger.debug("user contact  dto mapped to entity for persisting");
     return userContactDetailsRepository.save(userContact);
   }
 
@@ -49,12 +49,11 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
 
     Optional<UserContact> userDetails = userContactDetailsRepository.findById(id);
     if (!userDetails.isEmpty()) {
-      logger.info("Fetched user contact info for Id : {}", id);
-      //return new ResponseEntity(userDetails.get(), HttpStatus.OK);
+      logger.debug("Fetched user contact for Id : {}", id);
       return userDetails.get();
     }
-    logger.info("USER_CONTACT_INFO_NOT_FOUND_IN_DB {}", id);
-    throw new UserNotFoundException(USER_CONTACT_INFO_NOT_FOUND_IN_DB + id);
+    logger.debug(USER_CONTACT_NOT_FOUND_IN_DB + id);
+    throw new UserNotFoundException(USER_CONTACT_NOT_FOUND_IN_DB + id);
   }
 
   @Override
@@ -62,11 +61,11 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
     List<UserContact> listOfUserContact = userContactDetailsRepository.findAll();
     if (!listOfUserContact.isEmpty()) {
       logger
-          .info("Fetched all user contact info from database size : {}", listOfUserContact.size());
+          .debug("Fetched all user contact  from database size : {}", listOfUserContact.size());
       return listOfUserContact;
     }
-    logger.info(NO_USER_CONTACT_INFO_FOUND_IN_DB);
-    throw new UserNotFoundException(NO_USER_CONTACT_INFO_FOUND_IN_DB);
+    logger.info(NO_USER_CONTACT_FOUND_IN_DB);
+    throw new UserNotFoundException(NO_USER_CONTACT_FOUND_IN_DB);
   }
 
 
@@ -74,11 +73,10 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
   public String deleteUserContactInfoById(long id) {
 
     UserContact userContractInfo = userContactDetailsRepository.findById(id)
-        .orElseThrow(() -> new UserNotFoundException(USER_CONTACT_INFO_NOT_FOUND_IN_DB + "" + id));
+        .orElseThrow(() -> new UserNotFoundException(USER_CONTACT_NOT_FOUND_IN_DB + "" + id));
     userContactDetailsRepository.deleteById(id);
-    logger.info(USER_CONTACT_INFO_DELETED + "", id);
-    //return new ResponseEntity<>(USER_CONTACT_INFO_DELETED + id, HttpStatus.OK);
-    return USER_CONTACT_INFO_DELETED + id;
+    logger.debug(USER_CONTACT_DELETED + id);
+    return USER_CONTACT_DELETED + id;
 
   }
 
@@ -90,20 +88,19 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
       throw new UserIdValidationException(VALID_ID_ENTER);
     }
 
-    logger.info("Expected pattern matched for the received id's");
+    logger.debug("Expected pattern matched for the received id's");
 
     List<Long> listIds = Stream.of(ids.split(",")).map(Long::parseLong)
         .collect(Collectors.toList());
 
-    logger.info("Id's added into list to fetch the user contact info : {}", listIds);
+    logger.debug("Id's added into list to fetch the user contact info : {}", listIds);
 
     List<UserContact> listOfUserDetails = userContactDetailsRepository.findAllById(listIds);
     if (listOfUserDetails.isEmpty()) {
-      logger.info(REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB);
-      throw new NoSuchElementException(REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB + listIds);
+      logger.info(REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB);
+      throw new NoSuchElementException(REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB + listIds);
     } else {
       logger.info("received user contact info for requested id's : {}", listIds);
-      //return new ResponseEntity<>(listOfUserDetails, HttpStatus.OK);
       return listOfUserDetails;
     }
 
@@ -120,7 +117,7 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
           userContactDto));
     } else {
       logger.info("USER_CONTACT_INFO_NOT_FOUND_IN_DB {}", id);
-      throw new UserNotFoundException(USER_CONTACT_INFO_NOT_FOUND_IN_DB + id);
+      throw new UserNotFoundException(USER_CONTACT_NOT_FOUND_IN_DB + id);
     }
   }
 

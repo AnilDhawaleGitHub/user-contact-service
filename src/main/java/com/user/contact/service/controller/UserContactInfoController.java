@@ -20,6 +20,7 @@ import javax.validation.Valid;
 @Api(tags = {"UserContactInfo"})
 @SwaggerDefinition(tags = {
     @Tag(name = "UserContactInfoController", description = "User Contact Info REST API")})
+@RequestMapping(value = "/v1/contacts")
 public class UserContactInfoController {
 
   private static final Logger logger = LoggerFactory.getLogger(UserContactInfoController.class);
@@ -28,7 +29,7 @@ public class UserContactInfoController {
   private UserContactInfoService userContactInfoService;
 
 
-  @PostMapping(value = "/v1/contacts")
+  @PostMapping()
   public ResponseEntity saveUserContractInfo(
       @Valid @RequestBody UserContactDto userContractInfoDto) {
     logger.info("user contact info received : {}", userContractInfoDto);
@@ -36,25 +37,27 @@ public class UserContactInfoController {
         HttpStatus.CREATED);
   }
 
-  @GetMapping(value = "/v1/contact/{id}")
+  @GetMapping(value = "/{id}")
   public UserContact getUserContactInfoById(@PathVariable long id) {
     logger.info("Fetching user contact info for Id : {}", id);
     return userContactInfoService.getUserContactInfoById(id);
   }
 
-  @GetMapping(value = "/v1/contacts/{ids}")
+  // It should be @GetMapping but as we already same @GetMapping and which is also
+  // taking String so its throwing amibiguty issue so changed it tompost
+  @PostMapping(value = "/{ids}")
   public List<UserContact> getUserContactInfoByIds(@RequestParam("ids") String ids) {
     logger.info("user contact ids received : {}", ids);
     return userContactInfoService.getUserContactInfoByIds(ids);
   }
 
-  @GetMapping(value = "/v1/contacts")
+  @GetMapping()
   public ResponseEntity getAllUserContactInfo() {
     logger.info("Fetching all user contact info from database");
     return new ResponseEntity(userContactInfoService.getAllUserContactInfo(), HttpStatus.OK);
   }
 
-  @PutMapping("/v1/contacts/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity updateUserContactInfoById(
       @Valid @RequestBody UserContactDto userContactDto, @PathVariable long id) {
     logger.info("updating user contact info for Id : {}", id);
@@ -62,7 +65,7 @@ public class UserContactInfoController {
         HttpStatus.OK);
   }
 
-  @DeleteMapping(value = "/v1/contacts/{id}")
+  @DeleteMapping(value = "/{id}")
   public ResponseEntity deleteUserContactInfoById(@PathVariable long id) {
     logger.info("Deleting user contact info for Id : {}", id);
     return new ResponseEntity(userContactInfoService.deleteUserContactInfoById(id), HttpStatus.OK);

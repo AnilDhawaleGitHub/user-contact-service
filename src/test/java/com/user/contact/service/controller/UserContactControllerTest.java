@@ -5,6 +5,7 @@ import com.user.contact.service.entity.UserContact;
 import com.user.contact.service.service.UserContactInfoService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -44,7 +45,7 @@ public class UserContactControllerTest {
     updatedUserContact = buildReceivedUserContactInfoForFindById();
   }
 
-  //get all user contact info test case
+  @DisplayName("get all user contact test case")
   @Test
   public void shouldReturnAllUserContactInfoTest() {
     when(userContactInfoService.getAllUserContactInfo())
@@ -58,7 +59,8 @@ public class UserContactControllerTest {
   }
 
 
-  //get user contact info by id test case
+
+  @DisplayName("get user contact by id test case")
   @Test
   public void shouldReturnUserContactInfoByIdTest() {
     when(userContactInfoService.getUserContactInfoById(1L))
@@ -72,7 +74,7 @@ public class UserContactControllerTest {
   }
 
 
-  //get user contact info by ids (1,2,3 etc) test case
+  @DisplayName("get user contact by ids (1,2,3 etc) test case")
   @Test
   public void shouldReturnUserDetailsByIdsTest() {
     when(userContactInfoService.getUserContactInfoByIds("1,2"))
@@ -83,18 +85,18 @@ public class UserContactControllerTest {
 
   }
 
-  //delete user contact info by ids test case
+  @DisplayName("delete user contact by ids test case")
   @Test
   public void shouldDeleteUserContactInfoByIdTest() {
     when(userContactInfoService.deleteUserContactInfoById(1L))
         .thenReturn("user contact info has been deleted for Id : 1");
-   ResponseEntity responseEntity = controller.deleteUserContactInfoById(1L);
+    ResponseEntity responseEntity = controller.deleteUserContactInfoById(1L);
     Assert.assertNotNull(responseEntity);
     assertThat(responseEntity.getStatusCode().is2xxSuccessful()).isTrue();
   }
 
 
-  //save user contact info test case
+  @DisplayName("save user contact test case")
   @Test
   public void shouldSaveUserContactInfoTest() {
     when(userContactInfoService.saveUserContactInfo(userContactDto))
@@ -105,7 +107,7 @@ public class UserContactControllerTest {
 
   }
 
-  //update user contact info by id test case
+  @DisplayName("update user contact by id test case")
   @Test
   public void shouldUpdateUserContactInfoByIdTest() {
     when(userContactInfoService.updateUserContactInfoById(1L, userContactDto))

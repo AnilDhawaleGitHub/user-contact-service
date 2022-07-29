@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(UserNotFoundException.class)
 
   public List<String> handleUserNotFoundException(UserNotFoundException ex) {
-    logger.info("Handling UserNotFoundException ..");
+    logger.debug("Handling UserNotFoundException ..");
     List<String> errors = new ArrayList<>();
     errors.add(ex.getMessage());
     return errors;
@@ -33,23 +33,15 @@ public class GlobalExceptionHandler {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(UserIdValidationException.class)
   public ResponseEntity<ErrorDto> handleUserIdValidationException(UserIdValidationException ex) {
-    logger.info("Handling UserIdValidationException ..");
-    ErrorDto errorDto = new ErrorDto();
-    errorDto.setMessage(ex.getMessage());
-    errorDto.setStatus("404");
-    errorDto.setTime(new Date().toString());
-    return new ResponseEntity<ErrorDto>(errorDto, HttpStatus.NOT_FOUND);
+    logger.debug("Handling UserIdValidationException ..");
+    return new ResponseEntity<ErrorDto>(buildErrorDto(ex.getMessage(),"400"), HttpStatus.NOT_FOUND);
   }
 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoSuchElementException.class)
   public ResponseEntity<ErrorDto> handleNoSuchElementException(NoSuchElementException ex) {
-    logger.info("Handling NoSuchElementException ..");
-    ErrorDto errorDTO = new ErrorDto();
-    errorDTO.setMessage(ex.getMessage());
-    errorDTO.setStatus("404");
-    errorDTO.setTime(new Date().toString());
-    return new ResponseEntity<ErrorDto>(errorDTO, HttpStatus.NOT_FOUND);
+    logger.debug("Handling NoSuchElementException ..");
+    return new ResponseEntity<ErrorDto>(buildErrorDto(ex.getMessage(),"400"), HttpStatus.NOT_FOUND);
   }
 
 
@@ -57,7 +49,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public Map<String, String> handleMethodArgumentNotValidException(
       MethodArgumentNotValidException ex) {
-    logger.info("Handling MethodArgumentNotValidException ..");
+    logger.debug("Handling MethodArgumentNotValidException ..");
     Map<String, String> errors = new HashMap<>();
     ex.getBindingResult().getAllErrors().forEach((error) -> {
       String fieldName = ((FieldError) error).getField();
@@ -72,9 +64,22 @@ public class GlobalExceptionHandler {
   @ResponseBody
   public Map<String, String> handleDataIntegrityViolationException(HttpServletRequest req,
       DataIntegrityViolationException e) {
-    logger.info("Handling DataIntegrityViolationException ..");
+    logger.debug("Handling DataIntegrityViolationException ..");
     Map<String, String> errors = new HashMap<>();
     errors.put("Duplicate phone no ", "Please enter unique phone no");
     return errors;
   }
+
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ErrorDto> handleRootException(Exception ex) {
+    logger.debug("Handling RootException ..");
+    return new ResponseEntity<ErrorDto>(buildErrorDto(ex.getMessage(),"500"), HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+
+  private ErrorDto buildErrorDto(String errorMsg, String status){
+    return ErrorDto.ErrorDto().message(errorMsg).status(status).time(new Date().toString()).build();
+  }
+
 }

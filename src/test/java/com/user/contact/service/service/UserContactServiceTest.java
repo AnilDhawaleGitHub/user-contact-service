@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -47,7 +48,7 @@ public class UserContactServiceTest {
 
   }
 
-  //get all user contact info test case
+  @DisplayName("get all user contact test case")
   @Test
   public void shouldReturnAllUserContactInfoTest() {
     when(userContactInfoRepository.findAll()).thenReturn(this.listOfUserContact);
@@ -57,7 +58,7 @@ public class UserContactServiceTest {
   }
 
 
-  //get user contact info by id test case
+  @DisplayName("get user contact info by id test case")
   @Test
   public void shouldReturnUserContactInfoByIdTest() {
     when(userContactInfoRepository.findById(1L))
@@ -71,7 +72,7 @@ public class UserContactServiceTest {
   }
 
 
-  //get user contact info by ids (1,2,3 etc) test case
+  @DisplayName("get user contact by ids (1,2,3 etc) test case")
   @Test
   public void shouldReturnUserDetailsByIdsTest() {
     when(userContactInfoRepository.findAllById(Arrays.asList(1L, 2L)))
@@ -82,7 +83,7 @@ public class UserContactServiceTest {
   }
 
 
-  //delete user contact info by ids test case
+  @DisplayName("delete user contact by ids test case")
   @Test
   public void shouldDeleteUserContactInfoByIdTest() {
     when(userContactInfoRepository.findById(1L))
@@ -94,7 +95,7 @@ public class UserContactServiceTest {
   }
 
 
-  //save user contact info test case
+  @DisplayName("save user contact test case")
   @Test
   public void shouldSaveUserContactInfoTest() {
     when(userContactInfoRepository.save(this.userContact)).thenReturn(this.userContact);
@@ -104,7 +105,7 @@ public class UserContactServiceTest {
   }
 
 
-  //update user contact info by id test case
+  @DisplayName("update user contact by id test case")
   @Test
   public void shouldUpdateUserContactInfoByIdTest() {
     when(userContactInfoRepository.findById(1L))
@@ -116,7 +117,6 @@ public class UserContactServiceTest {
     Assert.assertNotNull(userContact);
     assertThat(userContact.getFirstName()).isEqualTo("UpdatedFirstName");
   }
-
 
 }
 
