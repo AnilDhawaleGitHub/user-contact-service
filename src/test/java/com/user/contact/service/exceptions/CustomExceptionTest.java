@@ -3,6 +3,7 @@ package com.user.contact.service.exceptions;
 import com.user.contact.service.controller.UserContactInfoController;
 import com.user.contact.service.service.UserContactInfoService;
 import com.user.contact.service.util.UserContactInfoUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,7 +25,7 @@ public class CustomExceptionTest {
   @Autowired
   private UserContactInfoController controller;
 
-  //test  case for custom exception : UserNotFoundException
+  @DisplayName("test  case for custom exception : UserNotFoundException")
   @Test
   public void shouldThrowUserNotFoundExceptionTest() {
 
@@ -36,7 +37,7 @@ public class CustomExceptionTest {
         .withMessageContaining(UserContactInfoUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB);
   }
 
-  //test  case for custom exception : UserNotFoundException
+  @DisplayName("test  case for custom exception : UserNotFoundException")
   @Test
   public void shouldThrowUserNotFoundExceptionForAllUsers() {
 
@@ -47,7 +48,7 @@ public class CustomExceptionTest {
         .withMessageContaining(UserContactInfoUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB);
   }
 
-  //test  case for custom exception : UserNotFoundException
+  @DisplayName("test  case for custom exception : UserNotFoundException")
   @Test
   public void shouldThrowUNoSuchElementException() {
     when(userContactInfoService.getUserContactInfoByIds("1,2,3"))
@@ -58,7 +59,7 @@ public class CustomExceptionTest {
         .withMessageContaining(UserContactInfoUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB);
   }
 
-  //test  case for custom exception : UserIdValidationException
+  @DisplayName("test  case for custom exception : UserIdValidationException")
   @Test
   public void shouldThrowUserIdValidationException() {
 
