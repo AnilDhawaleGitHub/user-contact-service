@@ -3,12 +3,14 @@ package com.user.contact.service.service;
 import static com.user.contact.service.util.UserContactUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.user.contact.service.dto.UserContactDto;
 import com.user.contact.service.entity.UserContact;
-
+import com.user.contact.service.exceptions.UserNotFoundException;
 import com.user.contact.service.repository.UserContactServiceRepository;
 import java.util.Arrays;
 import java.util.List;
@@ -90,7 +92,7 @@ public class UserContactServiceTest {
         .thenReturn(java.util.Optional.ofNullable(userContact));
 
     doNothing().when(userContactServiceRepository).deleteById(1L);
-    String deleteMsg= userContactService.deleteUserContactInfoById(1L);
+    String deleteMsg = userContactService.deleteUserContactInfoById(1L);
     assertNotNull(deleteMsg);
   }
 
@@ -117,6 +119,22 @@ public class UserContactServiceTest {
     Assert.assertNotNull(userContact);
     assertThat(userContact.getFirstName()).isEqualTo("UpdatedFirstName");
   }
+
+
+  @DisplayName("test to fetch AllUserContactInfo if there is no data in DB")
+  @Test
+  public void shouldThrowUserNotFoundExceptionTest() {
+
+    Exception exception = assertThrows(
+        UserNotFoundException.class,
+        () -> callAllUserContactInfo());
+    assertTrue(exception.getMessage().contains(NO_USER_CONTACT_FOUND_IN_DB));
+  }
+
+  void callAllUserContactInfo() {
+    userContactService.getAllUserContactInfo();
+  }
+
 
 }
 

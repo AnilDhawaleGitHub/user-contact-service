@@ -9,10 +9,11 @@ import java.util.List;
 
 public class UserContactUtil {
 
-  public static final String USER_CONTACT_NOT_FOUND_IN_DB = "user contact info not found in the database for Id : ";
-  public static final String REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB = "user contact info for the requested id's not present in database : ";
-  public static final String NO_USER_CONTACT_FOUND_IN_DB = "no user contact info found in the database ";
+  public static final String USER_CONTACT_NOT_FOUND_IN_DB = "user contact not found in the database for Id : ";
+  public static final String REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB = "user contact for the requested id's not present in database : ";
+  public static final String NO_USER_CONTACT_FOUND_IN_DB = "no user contact found in the database ";
   public static final String VALID_ID_ENTER = "please enter valid id's with comma separated eg: 1,2,3 ";
+  public static final String INVALID_CONTACT_NO="invalid contact number, please enter 10 digit no";
 
   public static List<UserContact> buildUserContactInfo() {
 
