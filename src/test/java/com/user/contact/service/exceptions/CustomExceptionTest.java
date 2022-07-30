@@ -2,7 +2,7 @@ package com.user.contact.service.exceptions;
 
 import com.user.contact.service.controller.UserContactInfoController;
 import com.user.contact.service.service.UserContactInfoService;
-import com.user.contact.service.util.UserContactInfoUtil;
+import com.user.contact.service.util.UserContactUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ public class CustomExceptionTest {
 
     when(userContactInfoService.getUserContactInfoById(1L))
         .thenThrow(
-            new UserNotFoundException(UserContactInfoUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB + 1L));
+            new UserNotFoundException(UserContactUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB + 1L));
     assertThatExceptionOfType(UserNotFoundException.class)
         .isThrownBy(() -> controller.getUserContactInfoById(1L))
-        .withMessageContaining(UserContactInfoUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB);
+        .withMessageContaining(UserContactUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB);
   }
 
   @DisplayName("test  case for custom exception : UserNotFoundException")
@@ -42,10 +42,10 @@ public class CustomExceptionTest {
   public void shouldThrowUserNotFoundExceptionForAllUsers() {
 
     when(userContactInfoService.getAllUserContactInfo())
-        .thenThrow(new UserNotFoundException(UserContactInfoUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB));
+        .thenThrow(new UserNotFoundException(UserContactUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB));
     assertThatExceptionOfType(UserNotFoundException.class)
         .isThrownBy(() -> controller.getAllUserContactInfo())
-        .withMessageContaining(UserContactInfoUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB);
+        .withMessageContaining(UserContactUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB);
   }
 
   @DisplayName("test  case for custom exception : UserNotFoundException")
@@ -53,10 +53,10 @@ public class CustomExceptionTest {
   public void shouldThrowUNoSuchElementException() {
     when(userContactInfoService.getUserContactInfoByIds("1,2,3"))
         .thenThrow(new NoSuchElementException(
-            UserContactInfoUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB));
+            UserContactUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB));
     assertThatExceptionOfType(NoSuchElementException.class)
         .isThrownBy(() -> controller.getUserContactInfoByIds("1,2,3"))
-        .withMessageContaining(UserContactInfoUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB);
+        .withMessageContaining(UserContactUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB);
   }
 
   @DisplayName("test  case for custom exception : UserIdValidationException")
@@ -65,11 +65,11 @@ public class CustomExceptionTest {
 
     when(userContactInfoService.getUserContactInfoByIds("a,b,c"))
         .thenThrow(
-            new UserIdValidationException(UserContactInfoUtil.VALID_ID_ENTER));
+            new UserIdValidationException(UserContactUtil.VALID_ID_ENTER));
 
     assertThatExceptionOfType(UserIdValidationException.class)
         .isThrownBy(() -> controller.getUserContactInfoByIds("a,b,c"))
-        .withMessageContaining(UserContactInfoUtil.VALID_ID_ENTER);
+        .withMessageContaining(UserContactUtil.VALID_ID_ENTER);
   }
 
 }

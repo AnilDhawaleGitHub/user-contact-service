@@ -7,7 +7,7 @@ import com.user.contact.service.entity.Address;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserContactInfoUtil {
+public class UserContactUtil {
 
   public static final String USER_CONTACT_INFO_NOT_FOUND_IN_DB = "user contact info not found in the database for Id : ";
   public static final String REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB = "user contact info for the requested id's not present in database : ";

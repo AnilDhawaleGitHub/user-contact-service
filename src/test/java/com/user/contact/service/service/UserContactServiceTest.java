@@ -1,6 +1,6 @@
 package com.user.contact.service.service;
 
-import static com.user.contact.service.util.UserContactInfoUtil.*;
+import static com.user.contact.service.util.UserContactUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doNothing;

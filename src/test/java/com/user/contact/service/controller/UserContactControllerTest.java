@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.user.contact.service.util.UserContactInfoUtil.*;
+import static com.user.contact.service.util.UserContactUtil.*;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
