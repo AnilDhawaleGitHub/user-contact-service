@@ -31,10 +31,10 @@ public class CustomExceptionTest {
 
     when(userContactInfoService.getUserContactInfoById(1L))
         .thenThrow(
-            new UserNotFoundException(UserContactUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB + 1L));
+            new UserNotFoundException(UserContactUtil.USER_CONTACT_NOT_FOUND_IN_DB + 1L));
     assertThatExceptionOfType(UserNotFoundException.class)
         .isThrownBy(() -> controller.getUserContactInfoById(1L))
-        .withMessageContaining(UserContactUtil.USER_CONTACT_INFO_NOT_FOUND_IN_DB);
+        .withMessageContaining(UserContactUtil.USER_CONTACT_NOT_FOUND_IN_DB);
   }
 
   @DisplayName("test  case for custom exception : UserNotFoundException")
@@ -42,10 +42,10 @@ public class CustomExceptionTest {
   public void shouldThrowUserNotFoundExceptionForAllUsers() {
 
     when(userContactInfoService.getAllUserContactInfo())
-        .thenThrow(new UserNotFoundException(UserContactUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB));
+        .thenThrow(new UserNotFoundException(UserContactUtil.NO_USER_CONTACT_FOUND_IN_DB));
     assertThatExceptionOfType(UserNotFoundException.class)
         .isThrownBy(() -> controller.getAllUserContactInfo())
-        .withMessageContaining(UserContactUtil.NO_USER_CONTACT_INFO_FOUND_IN_DB);
+        .withMessageContaining(UserContactUtil.NO_USER_CONTACT_FOUND_IN_DB);
   }
 
   @DisplayName("test  case for custom exception : UserNotFoundException")
@@ -53,10 +53,10 @@ public class CustomExceptionTest {
   public void shouldThrowUNoSuchElementException() {
     when(userContactInfoService.getUserContactInfoByIds("1,2,3"))
         .thenThrow(new NoSuchElementException(
-            UserContactUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB));
+            UserContactUtil.REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB));
     assertThatExceptionOfType(NoSuchElementException.class)
         .isThrownBy(() -> controller.getUserContactInfoByIds("1,2,3"))
-        .withMessageContaining(UserContactUtil.REQUESTED_USER_CONTACT_INFO_NOT_FOUND_IN_DB);
+        .withMessageContaining(UserContactUtil.REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB);
   }
 
   @DisplayName("test  case for custom exception : UserIdValidationException")
