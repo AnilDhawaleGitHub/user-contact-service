@@ -4,7 +4,7 @@ import com.user.contact.service.dto.UserContactDto;
 import com.user.contact.service.entity.UserContact;
 import java.util.List;
 
-public interface UserContactInfoService {
+public interface UserContactService {
 
   UserContact saveUserContactInfo(UserContactDto userContractInfoDto);
 

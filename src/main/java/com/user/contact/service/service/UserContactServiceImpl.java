@@ -1,6 +1,6 @@
 package com.user.contact.service.service;
 
-import com.user.contact.service.repository.UserContactInfoRepository;
+import com.user.contact.service.repository.UserContactServiceRepository;
 import com.user.contact.service.dto.UserContactDto;
 import com.user.contact.service.entity.UserContact;
 import com.user.contact.service.exceptions.UserIdValidationException;
@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class UserContactInfoServiceImpl implements UserContactInfoService {
+public class UserContactServiceImpl implements UserContactService {
 
-  private static final Logger logger = LoggerFactory.getLogger(UserContactInfoServiceImpl.class);
+  private static final Logger logger = LoggerFactory.getLogger(UserContactServiceImpl.class);
 
   private static final String USER_CONTACT_NOT_FOUND_IN_DB = "user contact not found in the database for Id : ";
   private static final String REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB = "user contact for the requested id's not present in database : ";
@@ -31,7 +31,7 @@ public class UserContactInfoServiceImpl implements UserContactInfoService {
   private static final String VALID_ID_ENTER = "please enter valid id's with comma separated eg: 1,2,3 ";
 
   @Autowired
-  private UserContactInfoRepository userContactDetailsRepository;
+  private UserContactServiceRepository userContactDetailsRepository;
 
   ModelMapper modelMapper = null;
   UserContact userContact = null;

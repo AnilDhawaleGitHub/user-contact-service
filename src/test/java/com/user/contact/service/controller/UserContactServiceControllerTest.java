@@ -2,7 +2,7 @@ package com.user.contact.service.controller;
 
 import com.user.contact.service.dto.UserContactDto;
 import com.user.contact.service.entity.UserContact;
-import com.user.contact.service.service.UserContactInfoService;
+import com.user.contact.service.service.UserContactService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @ExtendWith({MockitoExtension.class})
-public class UserContactControllerTest {
+public class UserContactServiceControllerTest {
 
 
   @InjectMocks
-  private UserContactInfoController controller;
+  private UserContactServiceController controller;
 
   @Mock
-  private UserContactInfoService userContactInfoService;
+  private UserContactService userContactService;
 
   List<UserContact> listOfUserContact = null;
   UserContact userContact = null;
@@ -48,7 +48,7 @@ public class UserContactControllerTest {
   @DisplayName("get all user contact test case")
   @Test
   public void shouldReturnAllUserContactInfoTest() {
-    when(userContactInfoService.getAllUserContactInfo())
+    when(userContactService.getAllUserContactInfo())
         .thenReturn(listOfUserContact);
     ResponseEntity responseEntity = controller.getAllUserContactInfo();
     assertNotNull(responseEntity);
@@ -63,7 +63,7 @@ public class UserContactControllerTest {
   @DisplayName("get user contact by id test case")
   @Test
   public void shouldReturnUserContactInfoByIdTest() {
-    when(userContactInfoService.getUserContactInfoById(1L))
+    when(userContactService.getUserContactInfoById(1L))
         .thenReturn(userContact);
     UserContact userContact = controller.getUserContactInfoById(1L);
     Assert.assertNotNull(userContact);
@@ -77,7 +77,7 @@ public class UserContactControllerTest {
   @DisplayName("get user contact by ids (1,2,3 etc) test case")
   @Test
   public void shouldReturnUserDetailsByIdsTest() {
-    when(userContactInfoService.getUserContactInfoByIds("1,2"))
+    when(userContactService.getUserContactInfoByIds("1,2"))
         .thenReturn(this.listOfUserContact);
     List<UserContact> listOfUserContact = controller.getUserContactInfoByIds("1,2");
     Assert.assertNotNull(listOfUserContact);
@@ -88,7 +88,7 @@ public class UserContactControllerTest {
   @DisplayName("delete user contact by ids test case")
   @Test
   public void shouldDeleteUserContactInfoByIdTest() {
-    when(userContactInfoService.deleteUserContactInfoById(1L))
+    when(userContactService.deleteUserContactInfoById(1L))
         .thenReturn("user contact info has been deleted for Id : 1");
     ResponseEntity responseEntity = controller.deleteUserContactInfoById(1L);
     Assert.assertNotNull(responseEntity);
@@ -99,7 +99,7 @@ public class UserContactControllerTest {
   @DisplayName("save user contact test case")
   @Test
   public void shouldSaveUserContactInfoTest() {
-    when(userContactInfoService.saveUserContactInfo(userContactDto))
+    when(userContactService.saveUserContactInfo(userContactDto))
         .thenReturn(userContact);
     ResponseEntity responseEntity = controller.saveUserContractInfo(userContactDto);
     Assert.assertNotNull(userContact);
@@ -110,7 +110,7 @@ public class UserContactControllerTest {
   @DisplayName("update user contact by id test case")
   @Test
   public void shouldUpdateUserContactInfoByIdTest() {
-    when(userContactInfoService.updateUserContactInfoById(1L, userContactDto))
+    when(userContactService.updateUserContactInfoById(1L, userContactDto))
         .thenReturn(updatedUserContact);
     ResponseEntity responseEntity = controller.updateUserContactInfoById(userContactDto, 1L);
     Assert.assertNotNull(responseEntity);

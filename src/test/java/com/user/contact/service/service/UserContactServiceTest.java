@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import com.user.contact.service.dto.UserContactDto;
 import com.user.contact.service.entity.UserContact;
 
-import com.user.contact.service.repository.UserContactInfoRepository;
+import com.user.contact.service.repository.UserContactServiceRepository;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,10 +26,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class UserContactServiceTest {
 
   @InjectMocks
-  UserContactInfoService userContactInfoService = new UserContactInfoServiceImpl();
+  UserContactService userContactService = new UserContactServiceImpl();
 
   @Mock
-  UserContactInfoRepository userContactInfoRepository;
+  UserContactServiceRepository userContactServiceRepository;
 
   List<UserContact> listOfUserContact = null;
   UserContact userContact = null;
@@ -51,8 +51,8 @@ public class UserContactServiceTest {
   @DisplayName("get all user contact test case")
   @Test
   public void shouldReturnAllUserContactInfoTest() {
-    when(userContactInfoRepository.findAll()).thenReturn(this.listOfUserContact);
-    List<UserContact> listOfUserContact = userContactInfoService.getAllUserContactInfo();
+    when(userContactServiceRepository.findAll()).thenReturn(this.listOfUserContact);
+    List<UserContact> listOfUserContact = userContactService.getAllUserContactInfo();
     assertNotNull(listOfUserContact);
     assertThat(listOfUserContact.size()).isEqualTo(2);
   }
@@ -61,9 +61,9 @@ public class UserContactServiceTest {
   @DisplayName("get user contact info by id test case")
   @Test
   public void shouldReturnUserContactInfoByIdTest() {
-    when(userContactInfoRepository.findById(1L))
+    when(userContactServiceRepository.findById(1L))
         .thenReturn(java.util.Optional.ofNullable(userContact));
-    UserContact userContact = userContactInfoService.getUserContactInfoById(1L);
+    UserContact userContact = userContactService.getUserContactInfoById(1L);
     assertNotNull(userContact);
     assertThat(userContact.getFirstName()).isEqualTo("FirstName");
     assertThat(userContact.getContactNo()).isEqualTo("1234567890");
@@ -75,9 +75,9 @@ public class UserContactServiceTest {
   @DisplayName("get user contact by ids (1,2,3 etc) test case")
   @Test
   public void shouldReturnUserDetailsByIdsTest() {
-    when(userContactInfoRepository.findAllById(Arrays.asList(1L, 2L)))
+    when(userContactServiceRepository.findAllById(Arrays.asList(1L, 2L)))
         .thenReturn(this.listOfUserContact);
-    List<UserContact> listOfUserContact = userContactInfoService.getUserContactInfoByIds("1,2");
+    List<UserContact> listOfUserContact = userContactService.getUserContactInfoByIds("1,2");
     assertNotNull(listOfUserContact);
     assertThat(listOfUserContact.size()).isEqualTo(2);
   }
@@ -86,11 +86,11 @@ public class UserContactServiceTest {
   @DisplayName("delete user contact by ids test case")
   @Test
   public void shouldDeleteUserContactInfoByIdTest() {
-    when(userContactInfoRepository.findById(1L))
+    when(userContactServiceRepository.findById(1L))
         .thenReturn(java.util.Optional.ofNullable(userContact));
 
-    doNothing().when(userContactInfoRepository).deleteById(1L);
-    String deleteMsg= userContactInfoService.deleteUserContactInfoById(1L);
+    doNothing().when(userContactServiceRepository).deleteById(1L);
+    String deleteMsg= userContactService.deleteUserContactInfoById(1L);
     assertNotNull(deleteMsg);
   }
 
@@ -98,8 +98,8 @@ public class UserContactServiceTest {
   @DisplayName("save user contact test case")
   @Test
   public void shouldSaveUserContactInfoTest() {
-    when(userContactInfoRepository.save(this.userContact)).thenReturn(this.userContact);
-    UserContact userContact = userContactInfoService
+    when(userContactServiceRepository.save(this.userContact)).thenReturn(this.userContact);
+    UserContact userContact = userContactService
         .saveUserContactInfo(userContactDtoForSave);
     assertNotNull(userContact);
   }
@@ -108,11 +108,11 @@ public class UserContactServiceTest {
   @DisplayName("update user contact by id test case")
   @Test
   public void shouldUpdateUserContactInfoByIdTest() {
-    when(userContactInfoRepository.findById(1L))
+    when(userContactServiceRepository.findById(1L))
         .thenReturn(java.util.Optional.ofNullable(this.userContact));
-    when(userContactInfoRepository.save(this.userContact)).thenReturn(
+    when(userContactServiceRepository.save(this.userContact)).thenReturn(
         this.userContact);
-    UserContact userContact = userContactInfoService
+    UserContact userContact = userContactService
         .updateUserContactInfoById(1L, userContactDto);
     Assert.assertNotNull(userContact);
     assertThat(userContact.getFirstName()).isEqualTo("UpdatedFirstName");
