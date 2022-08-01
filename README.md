@@ -56,7 +56,7 @@ If you use IntelliJ, please install the Lombok plugin.
 # Best practices followed on this framework
 - used mvc design pattern
 - used builder design pattern
-- used FASAD pattern
+- used Faced design pattern
 - Followed SOLID design principle
     1. single responsibility principle 
     2. interface segregation principle 
