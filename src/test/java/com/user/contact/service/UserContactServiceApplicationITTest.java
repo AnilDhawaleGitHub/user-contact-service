@@ -61,7 +61,7 @@ class UserContactServiceApplicationITTest {
   public void checkUserContactInfoSave1Test() throws Exception {
 
     userContactDto = buildUserInfoDto();
-    userContactDto.setContactNo("1234512345");
+    userContactDto.setContactNo("+911234512345");
 
     mvc.perform(MockMvcRequestBuilders.
         post("/v1/contacts")

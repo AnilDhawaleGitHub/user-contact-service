@@ -68,7 +68,7 @@ public class UserContactServiceControllerTest {
     UserContact userContact = controller.getUserContactInfoById(1L);
     Assert.assertNotNull(userContact);
     assertThat(userContact.getFirstName()).isEqualTo("FirstName");
-    assertThat(userContact.getContactNo()).isEqualTo("1234567890");
+    assertThat(userContact.getContactNo()).isEqualTo("+911234567890");
     assertThat(userContact.getAddress().getPostCode()).isEqualTo("XXZ123");
 
   }

@@ -13,7 +13,7 @@ public class UserContactUtil {
   public static final String REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB = "user contact for the requested id's not present in database : ";
   public static final String NO_USER_CONTACT_FOUND_IN_DB = "no user contact found in the database ";
   public static final String VALID_ID_ENTER = "please enter valid id's with comma separated eg: 1,2,3 ";
-  public static final String INVALID_CONTACT_NO="invalid contact number, please enter 10 digit no";
+  public static final String INVALID_CONTACT_NO="invalid contact number, please enter 12 digit no e.g : +919960627712";
 
   public static List<UserContact> buildUserContactInfo() {
 
@@ -23,13 +23,13 @@ public class UserContactUtil {
         .postCode("XXZ123").build();
     UserContact userContact1 = UserContact.userContactInfoWith().id(1L)
         .firstName("FirstName")
-        .lastName("LastName").contactNo("1234567890").address(address1).build();
+        .lastName("LastName").contactNo("+911234567890").address(address1).build();
 
     Address address2 = Address.addressWith().id(2L).doorNo("30B").streetName("Street Name1")
         .postCode("XXZ121").build();
     UserContact userContact2 = UserContact.userContactInfoWith().id(1L)
         .firstName("FirstName1")
-        .lastName("LastName1").contactNo("1234567891").address(address2).build();
+        .lastName("LastName1").contactNo("+911234567891").address(address2).build();
 
     listOffUser.add(userContact1);
     listOffUser.add(userContact2);
@@ -45,7 +45,7 @@ public class UserContactUtil {
 
     UserContact userContact = UserContact.userContactInfoWith().id(0L)
         .firstName("FirstName").
-            lastName("LastName").contactNo("1234567890").address(address).build();
+            lastName("LastName").contactNo("+911234567890").address(address).build();
     return userContact;
   }
 
@@ -54,7 +54,7 @@ public class UserContactUtil {
     AddressDto addressDtoRequest = AddressDto.addressDtoBuilderWith().doorNo("30A")
         .streetName("Street Name").postCode("XXZ123").build();
     UserContactDto userContactDto = UserContactDto.userContactInfoDtoWith().
-        firstName("FirstName").lastName("LastName").contactNo("1234567890").address(
+        firstName("FirstName").lastName("LastName").contactNo("+911234567890").address(
         addressDtoRequest)
         .build();
     return userContactDto;
@@ -65,7 +65,7 @@ public class UserContactUtil {
     AddressDto addressDtoRequest = AddressDto.addressDtoBuilderWith().doorNo("U30A")
         .streetName("Updated Street Name").postCode("UXXZ123").build();
     UserContactDto userContactDto = UserContactDto.userContactInfoDtoWith().
-        firstName("UpdatedFirstName").lastName("UpdatedLastName").contactNo("1234567890")
+        firstName("UpdatedFirstName").lastName("UpdatedLastName").contactNo("+919960627712")
         .address(addressDtoRequest).build();
     return userContactDto;
   }
@@ -76,7 +76,7 @@ public class UserContactUtil {
         .postCode("XXZ123").build();
     UserContact userContact = UserContact.userContactInfoWith().id(1L)
         .firstName("UpdatedFirstName").
-            lastName("UpdatedLastName").contactNo("1234567890").address(address).build();
+            lastName("UpdatedLastName").contactNo("+919960627712").address(address).build();
     return userContact;
   }
 

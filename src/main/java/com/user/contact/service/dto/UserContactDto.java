@@ -18,10 +18,10 @@ public class UserContactDto implements Serializable {
   @NotEmpty(message = "last name should Not be empty")
   public String lastName;
 
-  @Pattern(regexp = "^\\d{10}$", message = "invalid contact number, please enter 10 digit no only")
+  @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "invalid contact number, please enter 12 digit no e.g : +919960627712")
   private String contactNo;
 
-  @Pattern(regexp = "^$|^[0-9X]{10}$", message = "invalid alternate contact number, please enter 10 digit no only")
+  @Pattern(regexp = "^$|^\\+(?:[0-9] ?){6,14}[0-9]$", message = "invalid alternate contact number, please enter 12 digit no e.g : +919960627712 or leave it blank")
   private String altContactNo;
 
   private AddressDto address;
