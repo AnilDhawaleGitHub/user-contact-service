@@ -43,8 +43,8 @@ public class UserContactServiceController {
     return userContactService.getUserContactInfoById(id);
   }
 
-  // It should be @GetMapping but as we already same @GetMapping and which is also
-  // taking String so its throwing amibiguty issue so changed it tompost
+  // It should be @GetMapping but as we already have same @GetMapping and which is
+  // taking String so its throwing ambiguity issue so changed it to Post
   @PostMapping(value = "/{ids}")
   public List<UserContact> getUserContactInfoByIds(@RequestBody String ids) {
     logger.info("user contact ids received : {}", ids);
