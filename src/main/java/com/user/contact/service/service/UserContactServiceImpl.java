@@ -28,7 +28,7 @@ public class UserContactServiceImpl implements UserContactService {
   private static final String REQUESTED_USER_CONTACT_NOT_FOUND_IN_DB = "user contact for the requested id's not present in database : ";
   private static final String NO_USER_CONTACT_FOUND_IN_DB = "no user contact found in the database ";
   private static final String USER_CONTACT_DELETED = "user contact info has been deleted for Id : ";
-  private static final String VALID_ID_ENTER = "please enter valid id's with comma separated eg: 1,2,3 ";
+  private static final String VALID_ID_ENTER = "please enter single Id only or comma separated id's eg: 1,2,3";
 
   @Autowired
   private UserContactServiceRepository userContactDetailsRepository;
@@ -83,7 +83,7 @@ public class UserContactServiceImpl implements UserContactService {
 
   @Override
   public List<UserContact> getUserContactInfoByIds(String ids) {
-    Matcher matcher = Pattern.compile("[0-9]+(,[0-9]+)+").matcher(ids);
+    Matcher matcher = Pattern.compile("^[0-9]+(,[0-9]+)*$").matcher(ids);
     if (!matcher.matches()) {
       throw new UserIdValidationException(VALID_ID_ENTER);
     }

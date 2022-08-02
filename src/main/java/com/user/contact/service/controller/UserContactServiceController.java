@@ -46,7 +46,7 @@ public class UserContactServiceController {
   // It should be @GetMapping but as we already same @GetMapping and which is also
   // taking String so its throwing amibiguty issue so changed it tompost
   @PostMapping(value = "/{ids}")
-  public List<UserContact> getUserContactInfoByIds(@RequestParam("ids") String ids) {
+  public List<UserContact> getUserContactInfoByIds(@RequestBody String ids) {
     logger.info("user contact ids received : {}", ids);
     return userContactService.getUserContactInfoByIds(ids);
   }
