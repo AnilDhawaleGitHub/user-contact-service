@@ -28,11 +28,11 @@ public class UserContact {
 
   @Column(name = "contact_no")
 
-  @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "invalid contact number, please enter 12 digit no e.g : +919960627712")
+  @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "invalid contact number, please enter valid contact number e.g : +919960627712")
   private String contactNo;
 
   @Column(name = "alt_contact_no")
-  @Pattern(regexp = "^$|^\\+(?:[0-9] ?){6,14}[0-9]$", message = "invalid alternate contact number, please enter 12 digit no e.g : +919960627712 or leave it blank")
+  @Pattern(regexp = "^$|^\\+(?:[0-9] ?){6,14}[0-9]$", message = "invalid alternate contact number, please enter valid alternate contact number e.g : +919960627712 or leave it blank")
   private String altContactNo;
 
   @OneToOne(
